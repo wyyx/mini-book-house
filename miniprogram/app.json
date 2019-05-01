@@ -1,0 +1,14 @@
+{
+  "pages": [
+    "pages/classic/classic"
+  ],
+  "window": {
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#D4D9B4",
+    "navigationBarTitleText": "丛林书屋",
+    "navigationBarTextStyle": "black",
+    "enablePullDownRefresh": true,
+    "backgroundColorTop": "#ff0000"
+  },
+  "sitemapLocation": "sitemap.json"
+}

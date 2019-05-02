@@ -1,3 +1,5 @@
+import { httpService } from '../../services/http.service'
+
 // miniprogram/pages/classic/classic.js
 Page({
   /**
@@ -9,7 +11,18 @@ Page({
    * Lifecycle function--Called when page load
    */
 
-  onLoad: function(options) {},
+  onLoad: function(options) {
+    httpService.setHeader('aaa', 'bbb')
+    httpService.request({
+      url: 'classic/latest',
+      success(res) {
+        console.log('TCL: res', res)
+      },
+      fail(err) {
+        console.log('TCL: err', err)
+      }
+    })
+  },
 
   /**
    * Lifecycle function--Called when page is initially rendered
@@ -39,10 +52,10 @@ Page({
   /**
    * Called when page reach bottom
    */
-  onReachBottom: function() {},
+  onReachBottom: function() {}
 
-  /**
-   * Called when user click on the top right corner to share
-   */
-  onShareAppMessage: function() {}
+  // /**
+  //  * Called when user click on the top right corner to share
+  //  */
+  // onShareAppMessage: function() {}
 })

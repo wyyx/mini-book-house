@@ -1,5 +1,6 @@
 import { classicService } from '../../services/classic.service'
 import { Classic } from '../../models/classic.model'
+import { likeService } from '../../services/like.service'
 
 // miniprogram/pages/classic/classic.js
 Page({
@@ -22,6 +23,14 @@ Page({
         classic: res.data
       })
     })
+  },
+
+  onLike: function(event) {
+    const artId = this.data.classic.id
+    const type = this.data.classic.type
+    const like = event.detail.like
+
+    likeService.like({ artId, type, like })
   },
 
   /**

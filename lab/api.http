@@ -1,0 +1,20 @@
+# like
+POST http://bl.7yue.pro/v1/like HTTP/1.1
+Content-Type: application/json
+appkey: VFgqtjP1ktjihbmr
+
+{
+  "art_id": 1,
+  "type": 100
+}
+###
+
+# cancel like
+POST http://bl.7yue.pro/v1/like/cancel HTTP/1.1
+Content-Type: application/json
+appkey: VFgqtjP1ktjihbmr
+
+{
+  "art_id": 1,
+  "type": 100
+}

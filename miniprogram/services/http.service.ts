@@ -11,7 +11,7 @@ const tips = {
 
 export class HttpService {
   headers: Headers = {
-    'Content-Type': 'application/json',
+    'content-type': 'application/json',
     appkey: apiConfig.appkey
   }
 
@@ -25,7 +25,7 @@ export class HttpService {
     }
 
     wx.request({
-      method: option.method,
+      ...option,
       url: apiConfig.baseUrl + option.url,
       header: this.headers,
       success: res => {

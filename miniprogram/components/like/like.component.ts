@@ -30,15 +30,14 @@ Component({
 
   methods: {
     onTap(event) {
-      const that: any = this
-
-      const like = that.properties.like ? false : true
-      const count = that.properties.like ? that.properties.count - 1 : that.properties.count + 1
-
-      that.setData({
+      const like = this.properties.like ? false : true
+      const count = this.properties.like ? this.properties.count - 1 : this.properties.count + 1
+      this.setData({
         like,
         count
       })
+
+      this.triggerEvent('like', { like }, {})
     }
   } as any
 })

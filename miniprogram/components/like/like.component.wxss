@@ -15,4 +15,5 @@
   font-size: 24rpx;
   line-height: 24rpx;
   align-self: flex-start;
+  padding-left: 4rpx;
 }

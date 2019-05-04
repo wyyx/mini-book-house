@@ -1,0 +1,6 @@
+/* miniprogram/pages/classic/classic.wxss */
+.header {
+  display: flex;
+  justify-content: space-between;
+  padding: 20rpx;
+}

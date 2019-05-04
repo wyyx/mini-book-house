@@ -1,9 +1,16 @@
 import { apiConfig } from '../configs/api.config'
 
+interface Headers {
+  [headerName: string]: string | number
+}
+const tips = {
+  1: '抱歉，出现了一个错误',
+  401: 'appkey无效',
+  3000: '期刊不存在'
+}
+
 export class HttpService {
-  headers: {
-    [headerName: string]: string | number
-  } = {
+  headers: Headers = {
     'Content-Type': 'application/json',
     appkey: apiConfig.appkey
   }
@@ -21,12 +28,29 @@ export class HttpService {
       method: option.method,
       url: apiConfig.baseUrl + option.url,
       header: this.headers,
-      success(res) {
-        option.success && option.success(res)
+      success: res => {
+        if (res.statusCode.toString().startsWith('2')) {
+          option.success && option.success(res)
+        } else {
+          this.showError(res.statusCode)
+        }
       },
-      fail(err) {
+      fail: err => {
         option.fail && option.fail(err)
+        this.showError(1)
       }
+    })
+  }
+
+  private showError(errorCode: number) {
+    if (!errorCode) {
+      errorCode = 1
+    }
+
+    wx.showToast({
+      title: tips[errorCode],
+      duration: 10000,
+      icon: 'none'
     })
   }
 }

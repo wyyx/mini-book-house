@@ -1,0 +1,33 @@
+/* components/date/date.component.wxss */
+.date-container {
+  display: inline-flex;
+  height: 60rpx;
+}
+
+.left-container {
+  line-height: 60rpx;
+}
+
+.right-container {
+  display: inline-flex;
+  flex-direction: column;
+  font-size: 18rpx;
+  justify-content: space-between;
+  line-height: 30rpx;
+}
+
+.num-title {
+  font-size: 30rpx;
+}
+
+.num {
+  font-size: 60rpx;
+  padding-right: 10rpx;
+}
+
+.divider {
+  display: inline-block;
+  height: 48rpx;
+  border-left: 1rpx solid black;
+  padding-left: 10rpx;
+}

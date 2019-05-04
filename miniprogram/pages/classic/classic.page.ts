@@ -1,26 +1,26 @@
-import { httpService } from '../../services/http.service'
+import { classicService } from '../../services/classic.service'
+import { Classic } from '../../models/classic.model'
 
 // miniprogram/pages/classic/classic.js
 Page({
   /**
    * Page initial data
    */
-  data: {},
+  data: {
+    classic: {} as Classic
+  },
 
   /**
    * Lifecycle function--Called when page load
    */
 
   onLoad: function(options) {
-    httpService.setHeader('aaa', 'bbb')
-    httpService.request({
-      url: 'classic/latest',
-      success(res) {
-        console.log('TCL: res', res)
-      },
-      fail(err) {
-        console.log('TCL: err', err)
-      }
+    classicService.getLatest(res => {
+      console.log('data', res.data)
+
+      this.setData({
+        classic: res.data
+      })
     })
   },
 

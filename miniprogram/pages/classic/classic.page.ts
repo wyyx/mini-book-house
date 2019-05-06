@@ -26,6 +26,8 @@ Page({
         currentClassic: res.data,
         firstClassic: res.data
       })
+
+      classicService.setStorageSync(res.data['index'], res.data)
     })
   },
 
@@ -47,7 +49,7 @@ Page({
 
   onPreviousOrNext(previousOrNext: 'previous' | 'next') {
     classicService.getPreviousOrNext(this.data.currentClassic.index, previousOrNext, res => {
-      const classic = res.data as Classic
+      const classic = res as Classic
 
       this.setData({
         currentClassic: classic,

@@ -21,13 +21,15 @@ export class HttpService {
     }
 
     wx.request({
+      method: option.method,
       url: apiConfig.baseUrl + option.url,
       header: { ...this.headers, ...option.header },
+      data: option.data,
       success: res => {
         if (res.statusCode.toString().startsWith('2')) {
           option.success && option.success(res)
         } else {
-          this.showError(res.statusCode)
+          this.showError(1)
         }
       },
       fail: err => {
@@ -44,7 +46,7 @@ export class HttpService {
 
     wx.showToast({
       title: tips[errorCode],
-      duration: 10000,
+      duration: 3000,
       icon: 'none'
     })
   }

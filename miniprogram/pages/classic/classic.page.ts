@@ -8,7 +8,10 @@ Page({
    * Page initial data
    */
   data: {
-    classic: {} as Classic
+    currentClassic: {} as Classic,
+    firstClassic: {} as Classic,
+    isFirst: true,
+    isLast: false
   },
 
   /**
@@ -20,17 +23,38 @@ Page({
       console.log('data', res.data)
 
       this.setData({
-        classic: res.data
+        currentClassic: res.data,
+        firstClassic: res.data
       })
     })
   },
 
   onLike: function(event) {
-    const artId = this.data.classic.id
-    const type = this.data.classic.type
+    const artId = this.data.currentClassic.id
+    const type = this.data.currentClassic.type
     const like = event.detail.like
 
     likeService.like({ artId, type, like })
+  },
+
+  onPrevious: function(event) {
+    this.onPreviousOrNext('next')
+  },
+
+  onNext: function(event) {
+    this.onPreviousOrNext('previous')
+  },
+
+  onPreviousOrNext(previousOrNext: 'previous' | 'next') {
+    classicService.getPreviousOrNext(this.data.currentClassic.index, previousOrNext, res => {
+      const classic = res.data as Classic
+
+      this.setData({
+        currentClassic: classic,
+        isFirst: classicService.isFirst(classic, this.data.firstClassic),
+        isLast: classicService.isLast(classic)
+      })
+    })
   },
 
   /**

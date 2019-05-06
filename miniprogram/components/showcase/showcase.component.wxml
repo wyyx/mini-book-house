@@ -1,7 +1,7 @@
 <!-- components/movie/movie.component.wxml -->
 <view>
   <image class="cover" mode="aspectFill" src="{{coverImgUrl}}"></image>
-  <image class="tag" mode="widthFix" src="../../images/movie_text.png"></image>
+  <image class="tag" mode="widthFix" src="./images/movie_text.png"></image>
   <view class="content-container">
     <text class="content">{{content}}</text>
   </view>

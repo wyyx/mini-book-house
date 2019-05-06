@@ -15,19 +15,14 @@ export class HttpService {
     appkey: apiConfig.appkey
   }
 
-  setHeader(headerName: string, headerValue: string | number) {
-    this.headers[headerName] = headerValue
-  }
-
   request(option: wx.RequestOption) {
     if (!option.method) {
       option.method = 'GET'
     }
 
     wx.request({
-      ...option,
       url: apiConfig.baseUrl + option.url,
-      header: this.headers,
+      header: { ...this.headers, ...option.header },
       success: res => {
         if (res.statusCode.toString().startsWith('2')) {
           option.success && option.success(res)

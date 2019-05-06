@@ -20,8 +20,8 @@ Component({
    * 组件的初始数据
    */
   data: {
-    likeImage: '../../images/like@2x.png',
-    nolikeImage: '../../images/nolike@2x.png'
+    likeImage: './images/like@2x.png',
+    nolikeImage: './images/nolike@2x.png'
   },
 
   /**

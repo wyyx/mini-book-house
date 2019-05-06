@@ -1,0 +1,9 @@
+<view class="container">
+  <view class="icon-wrapper" bind:tap="previous">
+    <image src="{{isFirst? previousDisIcon : previousIcon}}" mode="aspectFit" class="previous icon"></image>
+  </view>
+  <text class="title" mode="aspectFit">This is a Title</text>
+  <view class="icon-wrapper" bind:tap="next">
+    <image src="{{isLast? nextDisIcon : nextIcon}}" mode="aspectFit" class="next icon"></image>
+  </view>
+</view>

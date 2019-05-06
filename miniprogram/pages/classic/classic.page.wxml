@@ -1,7 +1,8 @@
 <view class="header">
-  <date-cmp index="{{classic.index}}"></date-cmp>
-  <like-cmp like="{{classic.like_status}}" count="{{classic.fav_nums}}" bind:like="onLike"></like-cmp>
+  <date-cmp index="{{currentClassic.index}}"></date-cmp>
+  <like-cmp like="{{currentClassic.like_status}}" count="{{currentClassic.fav_nums}}" bind:like="onLike"></like-cmp>
 </view>
 <view class="content">
-  <showcase-cmp coverImgUrl="{{classic.image}}" content="{{classic.content}}"></showcase-cmp>
+  <showcase-cmp coverImgUrl="{{currentClassic.image}}" content="{{currentClassic.content}}"></showcase-cmp>
+  <navi-cmp isFirst="{{isFirst}}" isLast="{{isLast}}" title="This is a Title" bind:previous="onPrevious" bind:next="onNext"></navi-cmp>
 </view>

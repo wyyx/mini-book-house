@@ -12,6 +12,15 @@ export class LikeService extends HttpService {
       success: res => {}
     })
   }
+
+  getLikeInfo(type: number, id: number, success) {
+    this.request({
+      url: `/classic/${type}/${id}/favor`,
+      success: res => {
+        success(res.data)
+      }
+    })
+  }
 }
 
 export const likeService = new LikeService()

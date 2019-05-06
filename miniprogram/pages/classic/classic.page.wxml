@@ -1,6 +1,6 @@
 <view class="header">
   <date-cmp index="{{currentClassic.index}}"></date-cmp>
-  <like-cmp like="{{currentClassic.like_status}}" count="{{currentClassic.fav_nums}}" bind:like="onLike"></like-cmp>
+  <like-cmp like="{{likeStatus}}" count="{{favNums}}" bind:like="onLike"></like-cmp>
 </view>
 <view class="content">
   <showcase-cmp coverImgUrl="{{currentClassic.image}}" content="{{currentClassic.content}}"></showcase-cmp>

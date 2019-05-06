@@ -11,7 +11,9 @@ Page({
     currentClassic: {} as Classic,
     firstClassic: {} as Classic,
     isFirst: true,
-    isLast: false
+    isLast: false,
+    likeStatus: false,
+    favNums: 0
   },
 
   /**
@@ -20,12 +22,14 @@ Page({
 
   onLoad: function(options) {
     classicService.getLatest(res => {
-      console.log('data', res.data)
+      const classic: Classic = res.data as Classic
 
       this.setData({
-        currentClassic: res.data,
-        firstClassic: res.data
+        currentClassic: classic,
+        firstClassic: classic
       })
+
+      this.loadLikeInfo(classic.type, classic.id)
 
       classicService.setStorageSync(res.data['index'], res.data)
     })
@@ -51,10 +55,21 @@ Page({
     classicService.getPreviousOrNext(this.data.currentClassic.index, previousOrNext, res => {
       const classic = res as Classic
 
+      this.loadLikeInfo(classic.type, classic.id)
+
       this.setData({
         currentClassic: classic,
         isFirst: classicService.isFirst(classic, this.data.firstClassic),
         isLast: classicService.isLast(classic)
+      })
+    })
+  },
+
+  loadLikeInfo(type: number, id: number) {
+    likeService.getLikeInfo(type, id, res => {
+      this.setData({
+        likeStatus: res.like_status,
+        favNums: res.fav_nums
       })
     })
   },

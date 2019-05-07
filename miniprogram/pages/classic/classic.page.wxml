@@ -4,7 +4,7 @@
 </view>
 <view class="content">
   <movie-cmp hidden="{{currentClassic.type !== 100 }}" coverImgUrl="{{currentClassic.image}}" content="{{currentClassic.content}}"></movie-cmp>
-  <music-cmp hidden="{{currentClassic.type !== 200}}" coverImgUrl="{{currentClassic.image}}" content="{{currentClassic.content}}"></music-cmp>
+  <music-cmp wx:if="{{currentClassic.type === 200}}" coverImgUrl="{{currentClassic.image}}" content="{{currentClassic.content}}" musicAudioSrc="{{currentClassic.url}}"></music-cmp>
   <essay-cmp hidden="{{currentClassic.type !== 300 }}" coverImgUrl="{{currentClassic.image}}" content="{{currentClassic.content}}"></essay-cmp>
   <navi-cmp isFirst="{{isFirst}}" isLast="{{isLast}}" title="{{currentClassic.title}}" bind:previous="onPrevious" bind:next="onNext"></navi-cmp>
 </view>

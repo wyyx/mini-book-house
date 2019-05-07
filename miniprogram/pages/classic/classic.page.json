@@ -2,7 +2,9 @@
   "usingComponents": {
     "like-cmp": "../../components/like/like.component",
     "date-cmp": "../../components/date/date.component",
-    "showcase-cmp": "../../components/showcase/showcase.component",
+    "movie-cmp": "../../components/movie/movie.component",
+    "music-cmp": "../../components/music/music.component",
+    "essay-cmp": "../../components/essay/essay.component",
     "navi-cmp": "../../components/navi/navi.component"
   }
 }

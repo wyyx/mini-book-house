@@ -1,0 +1,20 @@
+.cover {
+  width: 100%;
+}
+
+.tag {
+  width: 50rpx;
+  position: relative;
+  margin-top: -70rpx;
+  padding-left: 40rpx;
+}
+
+.content-container {
+  display: flex;
+  justify-content: center;
+  padding-top: 50rpx;
+}
+
+.content {
+  width: 80%;
+}

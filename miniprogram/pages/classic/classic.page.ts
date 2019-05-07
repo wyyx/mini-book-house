@@ -23,6 +23,7 @@ Page({
   onLoad: function(options) {
     classicService.getLatest(res => {
       const classic: Classic = res.data as Classic
+			console.log("TCL: classic", classic)
 
       this.setData({
         currentClassic: classic,

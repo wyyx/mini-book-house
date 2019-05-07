@@ -6,12 +6,15 @@
 }
 
 .content {
+  width: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
 }
 
-showcase-cmp {
+movie-cmp,
+music-cmp,
+essay-cmp {
   width: 100%;
 }
 

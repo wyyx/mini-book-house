@@ -1,9 +1,12 @@
-// components/movie/movie.component.js
-Component({
-  /**
-   * 组件的属性列表
-   */
+declare const Behavior
+
+export const episodeBehavior = Behavior({
   properties: {
+    hidden: {
+      type: Boolean,
+      value: false,
+      optionalTypes: []
+    },
     coverImgUrl: {
       type: String,
       value: '',
@@ -20,14 +23,9 @@ Component({
       optionalTypes: []
     }
   },
-
-  /**
-   * 组件的初始数据
-   */
-  data: {},
-
-  /**
-   * 组件的方法列表
-   */
+  data: {
+    myBehaviorData: {}
+  },
+  attached() {},
   methods: {}
 })

@@ -45,3 +45,21 @@
 .content {
   width: 80%;
 }
+
+.rotation {
+  -webkit-transform: rotate(360deg);
+  animation: rotation 20s linear infinite;
+  -moz-animation: rotation 20s linear infinite;
+  -webkit-animation: rotation 20s linear infinite;
+  -o-animation: rotation 20s linear infinite;
+}
+
+@-webkit-keyframes rotation {
+  from {
+    -webkit-transform: rotate(0deg);
+  }
+
+  to {
+    -webkit-transform: rotate(360deg);
+  }
+}

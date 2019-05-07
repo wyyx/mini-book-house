@@ -1,6 +1,6 @@
 <view class="container" hidden="{{hidden}}">
   <view class="cover-container">
-    <image class="cover" mode="aspectFit" src="{{coverImgUrl}}"></image>
+    <image class="cover {{isPlaying? 'rotation':''}}" mode="aspectFit" src="{{coverImgUrl}}"></image>
   </view>
   <view class="player-container">
     <image bind:tap="togglePlay" class="player" mode="aspectFit" src="{{ isPlaying? pauseImg:playImg}}"></image>

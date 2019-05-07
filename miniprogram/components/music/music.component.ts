@@ -40,6 +40,7 @@ Component({
     const that: any = this
 
     that.recoverPlayingStatus()
+    that.monitorPlayer()
   },
 
   /**
@@ -51,9 +52,26 @@ Component({
 
       if (audioContext.src === that.data.musicAudioSrc) {
         this.setData({
-          isPlaying: true
+          isPlaying: !audioContext.paused
         })
       }
+    },
+
+    monitorPlayer() {
+      const that: any = this
+
+      audioContext.onPlay(() => {
+        that.recoverPlayingStatus()
+      })
+      audioContext.onPause(() => {
+        that.recoverPlayingStatus()
+      })
+      audioContext.onStop(() => {
+        that.recoverPlayingStatus()
+      })
+      audioContext.onEnded(() => {
+        that.recoverPlayingStatus()
+      })
     },
 
     togglePlay() {
@@ -67,10 +85,6 @@ Component({
       } else {
         audioContext.play()
       }
-
-      this.setData({
-        isPlaying: that.data.isPlaying ? false : true
-      })
     }
   }
 })

@@ -6,8 +6,8 @@ export class LikeService extends HttpService {
       method: 'POST',
       url: data.like ? '/like' : '/like/cancel',
       data: {
-        art_id: 1,
-        type: 100
+        art_id: data.artId,
+        type: data.type
       },
       success: res => {}
     })

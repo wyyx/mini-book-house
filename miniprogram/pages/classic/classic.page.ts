@@ -21,18 +21,14 @@ Page({
    */
 
   onLoad: function(options) {
-    classicService.getLatest(res => {
-      const classic: Classic = res.data as Classic
-			console.log("TCL: classic", classic)
-
+    classicService.getLatest().then(classic => {
       this.setData({
         currentClassic: classic,
         firstClassic: classic
       })
 
       this.loadLikeInfo(classic.type, classic.id)
-
-      classicService.setStorageSync(res.data['index'], res.data)
+      classicService.setStorageSync(classic.index, classic)
     })
   },
 
@@ -53,24 +49,24 @@ Page({
   },
 
   onPreviousOrNext(previousOrNext: 'previous' | 'next') {
-    classicService.getPreviousOrNext(this.data.currentClassic.index, previousOrNext, res => {
-      const classic = res as Classic
+    classicService
+      .getPreviousOrNext(this.data.currentClassic.index, previousOrNext)
+      .then(classic => {
+        this.loadLikeInfo(classic.type, classic.id)
 
-      this.loadLikeInfo(classic.type, classic.id)
-
-      this.setData({
-        currentClassic: classic,
-        isFirst: classicService.isFirst(classic, this.data.firstClassic),
-        isLast: classicService.isLast(classic)
+        this.setData({
+          currentClassic: classic,
+          isFirst: classicService.isFirst(classic, this.data.firstClassic),
+          isLast: classicService.isLast(classic)
+        })
       })
-    })
   },
 
   loadLikeInfo(type: number, id: number) {
-    likeService.getLikeInfo(type, id, res => {
+    likeService.getLikeInfo(type, id).then(like => {
       this.setData({
-        likeStatus: res.like_status,
-        favNums: res.fav_nums
+        likeStatus: like.like_status,
+        favNums: like.fav_nums
       })
     })
   },

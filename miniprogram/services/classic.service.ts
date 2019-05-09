@@ -4,31 +4,29 @@ import { Classic } from '../models/classic.model'
 export const STORAGE_PREFIX = 'classic-'
 
 export class ClassicService extends HttpService {
-  getLatest(success: wx.RequestSuccessCallback) {
-    this.request({
-      url: '/classic/latest',
-      success: res => {
-        success(res)
-      }
-    })
+  getLatest() {
+    return this.request({
+      path: '/classic/latest'
+    }).then(res => res.data as Classic)
   }
 
-  getPreviousOrNext(currentIndex: number, previousOrNext: 'previous' | 'next', success) {
+  getPreviousOrNext(currentIndex: number, previousOrNext: 'previous' | 'next') {
     const targetIndex = previousOrNext === 'previous' ? currentIndex - 1 : currentIndex + 1
-    const classic = this.getStorageByIndex(targetIndex)
+    const classicFromStorage = this.getStorageByIndex(targetIndex)
 
-    if (!classic) {
-      this.request({
-        url: `/classic/${currentIndex}/${previousOrNext}`,
-        success: res => {
-          success(res.data)
+    if (!classicFromStorage) {
+      return this.request({
+        path: `/classic/${currentIndex}/${previousOrNext}`
+      }).then(res => {
+        // add or update storage
+        this.setStorageSync(targetIndex, res.data)
 
-          // save to storage
-          this.setStorageSync(targetIndex, res.data)
-        }
+        return res.data as Classic
       })
     } else {
-      success(classic)
+      return new Promise<Classic>((resolve, reject) => {
+        resolve(classicFromStorage)
+      })
     }
   }
 

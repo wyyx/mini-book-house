@@ -1,4 +1,5 @@
 import { apiConfig } from '../configs/api.config'
+import { Method, RequestOption } from '../models/http.model'
 
 interface Headers {
   [headerName: string]: string | number
@@ -15,27 +16,26 @@ export class HttpService {
     appkey: apiConfig.appkey
   }
 
-  request(option: wx.RequestOption) {
-    if (!option.method) {
-      option.method = 'GET'
-    }
-
-    wx.request({
-      method: option.method,
-      url: apiConfig.baseUrl + option.url,
-      header: { ...this.headers, ...option.header },
-      data: option.data,
-      success: res => {
-        if (res.statusCode.toString().startsWith('2')) {
-          option.success && option.success(res)
-        } else {
+  request({ path, method = 'GET', data = {} }: RequestOption) {
+    return new Promise<wx.RequestSuccessCallbackResult>((resolve, reject) => {
+      wx.request({
+        method,
+        url: apiConfig.baseUrl + path,
+        header: this.headers,
+        data,
+        success: res => {
+          if (res.statusCode.toString().startsWith('2')) {
+            resolve(res)
+          } else {
+            this.showError(1)
+            reject(res)
+          }
+        },
+        fail: err => {
           this.showError(1)
+          reject(err)
         }
-      },
-      fail: err => {
-        option.fail && option.fail(err)
-        this.showError(1)
-      }
+      })
     })
   }
 

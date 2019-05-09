@@ -1,25 +1,22 @@
 import { HttpService } from './http.service'
+import { Like } from '../models/like.model'
 
 export class LikeService extends HttpService {
   like(data: { artId: number; type: number; like: boolean }) {
-    this.request({
+    return this.request({
       method: 'POST',
-      url: data.like ? '/like' : '/like/cancel',
+      path: data.like ? '/like' : '/like/cancel',
       data: {
         art_id: data.artId,
         type: data.type
-      },
-      success: res => {}
+      }
     })
   }
 
-  getLikeInfo(type: number, id: number, success) {
-    this.request({
-      url: `/classic/${type}/${id}/favor`,
-      success: res => {
-        success(res.data)
-      }
-    })
+  getLikeInfo(type: number, id: number) {
+    return this.request({
+      path: `/classic/${type}/${id}/favor`
+    }).then(res => res.data as Like)
   }
 }
 

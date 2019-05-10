@@ -1,5 +1,9 @@
 {
-  "fav_nums": 1,
-  "id": 1,
-  "like_status": 1
+  "comment": [
+    {
+      "content": "i hate6!",
+      "nums": 1
+    }
+  ],
+  "book_id": 1
 }

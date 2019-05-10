@@ -1,5 +1,10 @@
 {
-  "pages": ["pages/classic/classic.page"],
+  "pages": [
+    "pages/classic/classic-page",
+    "pages/book/book-page",
+    "pages/favorite/favorite-page",
+    "pages/book-detail/book-detail-page"
+  ],
   "window": {
     "backgroundTextStyle": "light",
     "navigationBarBackgroundColor": "#D4D9B4",
@@ -8,5 +13,29 @@
     "enablePullDownRefresh": true,
     "backgroundColorTop": "#9CA67B"
   },
-  "sitemapLocation": "sitemap.json"
+  "sitemapLocation": "sitemap.json",
+  "tabBar": {
+    "color": "#C7C7C7",
+    "selectedColor": "#000000",
+    "list": [
+      {
+        "pagePath": "pages/classic/classic-page",
+        "text": "经典",
+        "iconPath": "./images/tab-bar/classic.png",
+        "selectedIconPath": "./images/tab-bar/classic@highlight.png"
+      },
+      {
+        "pagePath": "pages/book/book-page",
+        "text": "书籍",
+        "iconPath": "./images/tab-bar/book.png",
+        "selectedIconPath": "./images/tab-bar/book@highlight.png"
+      },
+      {
+        "pagePath": "pages/favorite/favorite-page",
+        "text": "收藏",
+        "iconPath": "./images/tab-bar/my.png",
+        "selectedIconPath": "./images/tab-bar/my@highlight.png"
+      }
+    ]
+  }
 }

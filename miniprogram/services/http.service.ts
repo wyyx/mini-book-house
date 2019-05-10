@@ -4,6 +4,7 @@ import { Method, RequestOption } from '../models/http.model'
 interface Headers {
   [headerName: string]: string | number
 }
+
 const tips = {
   1: '抱歉，出现了一个错误',
   401: 'appkey无效',
@@ -11,17 +12,17 @@ const tips = {
 }
 
 export class HttpService {
-  headers: Headers = {
+  private headers: Headers = {
     'content-type': 'application/json',
     appkey: apiConfig.appkey
   }
 
-  request({ path, method = 'GET', data = {} }: RequestOption) {
+  request({ path, method = 'GET', data = {}, headers = {} }: RequestOption) {
     return new Promise<wx.RequestSuccessCallbackResult>((resolve, reject) => {
       wx.request({
         method,
         url: apiConfig.baseUrl + path,
-        header: this.headers,
+        header: { ...this.headers, ...headers },
         data,
         success: res => {
           if (res.statusCode.toString().startsWith('2')) {

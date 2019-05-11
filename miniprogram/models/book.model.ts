@@ -6,3 +6,10 @@ export interface Book {
   like_status: number
   title: string
 }
+
+export interface SearchBookResponse {
+  books: Book[]
+  count: number
+  start: number
+  total: number
+}

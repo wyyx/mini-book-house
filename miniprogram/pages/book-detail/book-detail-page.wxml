@@ -61,6 +61,6 @@
       </tag-cmp>
     </block>
   </view>
-  <input bindconfirm="onPost" class="post" placeholder='短评最多12个字'></input>
+  <input bind:confirm="onPost" class="post" placeholder='短评最多12个字'></input>
 </view>
 <mask-cmp wx:if="{{posting}}" />

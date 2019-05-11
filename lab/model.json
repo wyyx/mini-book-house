@@ -1,9 +1,10 @@
 {
-  "comment": [
-    {
-      "content": "i hate6!",
-      "nums": 1
-    }
-  ],
-  "book_id": 1
+  "hot": [
+    "Fluent Python",
+    "Python",
+    "小程序Java核心编程",
+    "慕课网7七月",
+    "微信小程序开发入门与实践",
+    "C++"
+  ]
 }

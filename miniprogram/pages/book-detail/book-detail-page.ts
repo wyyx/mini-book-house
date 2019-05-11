@@ -24,28 +24,18 @@ Page({
 
     const detail$ = bookService.getDetail(bookId)
     const comments$ = bookService.getComments(bookId)
-    const likeStatus$ = bookService.getLikeInfo(bookId)
+    const likeInfo$ = bookService.getLikeInfo(bookId)
 
-    detail$.then(res => {
+    Promise.all([detail$, comments$, likeInfo$]).then(([detail, comments, likeInfo]) => {
       this.setData({
-        book: res
+        book: detail,
+        comments: comments,
+        likeStatus: likeInfo.like_status,
+        likeCount: likeInfo.fav_nums
       })
-    })
 
-    comments$.then(res => {
-      this.setData({
-        comments: res
-      })
+      wx.hideLoading()
     })
-
-    likeStatus$.then(res => {
-      this.setData({
-        likeStatus: res.like_status,
-        likeCount: res.fav_nums
-      })
-    })
-
-    wx.hideLoading()
   },
 
   onLike(event) {

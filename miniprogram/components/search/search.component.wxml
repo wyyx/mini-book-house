@@ -2,10 +2,10 @@
   <view class="header">
     <view class="search-container">
       <image class="icon" src="./images/search.png" />
-      <input value="{{q}}" placeholder-class='in-bar' placeholder='书籍名' class='bar' auto-focus="true" />
-      <image class="cancel-img" src="./images/cancel.png" />
+      <input value="{{q}}" bind:confirm="onConfirm" placeholder-class='in-bar' placeholder='书籍名' class='bar' auto-focus="true" />
+      <image bind:tap="onClear" class="cancel-img" src="./images/cancel.png" />
     </view>
-    <view class='cancel'>取消</view>
+    <view class='cancel' bind:tap="onCancel">取消</view>
   </view>
   <view wx:if="{{!searching}}">
     <view class="history">
@@ -15,7 +15,7 @@
       </view>
       <view class="tags">
         <block wx:key="" wx:for="{{historyWords}}">
-          <tag-cmp text="{{item}}" />
+          <tag-cmp bind:tapping="onConfirm" text="{{item}}" />
         </block>
       </view>
     </view>
@@ -26,17 +26,17 @@
       </view>
       <view class="tags">
         <block wx:key="" wx:for="{{hotWords}}">
-          <tag-cmp text="{{item}}" />
+          <tag-cmp bind:tapping="onConfirm" text="{{item}}" />
         </block>
       </view>
     </view>
   </view>
-  <view wx:if="{{searching}}" class="books-container">
-    <block wx:for="{{dataArray}}" wx:key="{{item.id}}">
+  <view wx:if="{{searching && !loadingCenter}}" class="books-container">
+    <block wx:for="{{books}}" wx:key="{{item.id}}">
       <book-cmp showLike="{{false}}" book="{{item}}" class="book" />
     </block>
   </view>
   <loading-cmp class="loading-center" wx:if="{{loadingCenter}}" />
-  <loading-cmp class="loading" wx:if="{{loading}}" />
-  <text wx:if="{{noneResult}}" class="empty-tip">没有搜索到书籍</text>
+  <loading-cmp class="loading" wx:if="{{loadingMore}}" />
+  <text wx:if="{{noResult}}" class="empty-tip">没有搜索到书籍</text>
 </view>

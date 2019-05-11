@@ -1,5 +1,5 @@
 import { HttpService } from './http.service'
-import { Book } from '../models/book.model'
+import { Book, SearchBookResponse } from '../models/book.model'
 import { BookDetail } from '../models/book-detail.model'
 import { CommentResponse, Comment } from '../models/comment.model'
 import { LikeInfo } from '../models/like.model'
@@ -68,6 +68,18 @@ export class BookService extends HttpService {
         book_id: id,
         content: comment
       }
+    })
+  }
+
+  search(start: number, q: string) {
+    return this.request({
+      path: '/book/search?summary=1',
+      data: {
+        q: q,
+        start: start
+      }
+    }).then(res => {
+      return (res.data as SearchBookResponse).books
     })
   }
 }

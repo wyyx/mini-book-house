@@ -44,22 +44,12 @@ export class BookService extends HttpService {
   }
 
   getComments(id: string | number): Promise<Comment[]> {
-    const commentsFromStorage = wx.getStorageSync(`book-${id}-comments`) as Comment[]
-
-    if (!commentsFromStorage) {
-      return this.request({
-        path: `/book/${id}/short_comment`
-      }).then(res => {
-        const resTypes = res.data as CommentResponse
-        // save to local storage
-        wx.setStorageSync(`book-${id}-comments`, resTypes.comments)
-        return resTypes.comments
-      })
-    } else {
-      return new Promise((resolve, reject) => {
-        resolve(commentsFromStorage)
-      })
-    }
+    return this.request({
+      path: `/book/${id}/short_comment`
+    }).then(res => {
+      const resTypes = res.data as CommentResponse
+      return resTypes.comments
+    })
   }
 
   getLikeInfo(id: string | number): Promise<LikeInfo> {
@@ -67,6 +57,17 @@ export class BookService extends HttpService {
       path: `/book/${id}/favor`
     }).then(res => {
       return res.data as LikeInfo
+    })
+  }
+
+  postComment(id: string | number, comment: string) {
+    return this.request({
+      path: '/book/add/short_comment',
+      method: 'POST',
+      data: {
+        book_id: id,
+        content: comment
+      }
     })
   }
 }

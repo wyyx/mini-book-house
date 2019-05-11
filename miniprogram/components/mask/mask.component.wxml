@@ -1,2 +1,1 @@
-<!--components/mask/mask.component.wxml-->
-<text>components/mask/mask.component.wxml</text>
+<view class="container"></view>

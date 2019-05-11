@@ -60,7 +60,7 @@
 }
 
 .content {
-  text-indent: 58rpx;
+  text-indent: 68rpx;
   font-weight: 500;
 }
 
@@ -70,13 +70,6 @@
   color: #aaa;
 }
 
-/* .comment-container>v-tag:nth-child(1)>view {
-  background-color: #fffbdd;
-}
-
-.comment-container>v-tag:nth-child(2)>view {
-  background-color: #eefbff;
-} */
 .ex-tag1 {
   background-color: #fffbdd !important;
 }
@@ -194,4 +187,8 @@
 
 .shadow {
   color: #999;
+}
+
+.sub-container > .content {
+  line-height: 180%;
 }

@@ -1,5 +1,6 @@
 import { bookService } from '../../services/book.service'
 import { likeService } from '../../services/like.service'
+import { ContentType } from '../../models/episode-type.model'
 
 Page({
   /**
@@ -21,25 +22,36 @@ Page({
     wx.showLoading({ title: '正在加载...' })
     const bookId = options.bookId
 
-    const detail = bookService.getDetail(bookId)
-    const comments = bookService.getComments(bookId)
-    const likeStatus = bookService.getLikeInfo(bookId)
+    const detail$ = bookService.getDetail(bookId)
+    const comments$ = bookService.getComments(bookId)
+    const likeStatus$ = bookService.getLikeInfo(bookId)
 
-    Promise.all([detail, comments, likeStatus]).then(res => {
+    detail$.then(res => {
       this.setData({
-        book: res[0],
-        comments: res[1],
-        likeStatus: res[2].like_status,
-        likeCount: res[2].fav_nums
+        book: res
       })
-      wx.hideLoading()
     })
+
+    comments$.then(res => {
+      this.setData({
+        comments: res
+      })
+    })
+
+    likeStatus$.then(res => {
+      this.setData({
+        likeStatus: res.like_status,
+        likeCount: res.fav_nums
+      })
+    })
+
+    wx.hideLoading()
   },
 
   onLike(event) {
     const that: any = this
     const like_or_cancel = event.detail.like
-    likeService.like({ artId: that.data.book.id, type: 400, like: like_or_cancel })
+    likeService.like({ artId: that.data.book.id, type: ContentType.Book, like: like_or_cancel })
   },
 
   onFakePost(event) {
@@ -68,6 +80,23 @@ Page({
       })
       return
     }
+
+    bookService.postComment(this.data.book.id, comment).then(res => {
+      wx.showToast({
+        title: '+ 1',
+        icon: 'none'
+      })
+
+      this.data.comments.unshift({
+        content: comment,
+        nums: 1
+      })
+
+      this.setData({
+        comments: this.data.comments,
+        posting: false
+      })
+    })
   }
 
   /**

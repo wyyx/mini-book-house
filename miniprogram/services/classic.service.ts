@@ -10,6 +10,12 @@ export class ClassicService extends HttpService {
     }).then(res => res.data as Classic)
   }
 
+  getById(type: number, id: number) {
+    return this.request({
+      path: `/classic/${type}/${id}`
+    }).then(res => res.data as Classic)
+  }
+
   getMyFavorite() {
     return this.request({
       path: '/classic/favor'

@@ -4,7 +4,8 @@
     "pages/book/book-page",
     "pages/favorite/favorite-page",
     "pages/book-detail/book-detail-page",
-    "pages/about/about-page"
+    "pages/about/about-page",
+    "pages/classic-detail/classic-detail-page"
   ],
   "window": {
     "backgroundTextStyle": "light",

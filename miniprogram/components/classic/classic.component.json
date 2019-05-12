@@ -1,0 +1,12 @@
+{
+  "component": true,
+  "usingComponents": {
+    "like-cmp": "../../components/like/like.component",
+    "date-cmp": "../../components/date/date.component",
+    "movie-cmp": "../../components/movie/movie.component",
+    "music-cmp": "../../components/music/music.component",
+    "essay-cmp": "../../components/essay/essay.component",
+    "navi-cmp": "../../components/navi/navi.component",
+    "image-button-cmp": "../../components/image-button/image-button.component"
+  }
+}

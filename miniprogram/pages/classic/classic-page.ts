@@ -1,74 +1,16 @@
-import { classicService } from '../../services/classic.service'
-import { Classic } from '../../models/classic.model'
-import { likeService } from '../../services/like.service'
-
-// miniprogram/pages/classic/classic.js
 Page({
-  /**
-   * Page initial data
-   */
   data: {
-    currentClassic: {} as Classic,
-    firstClassic: {} as Classic,
-    isFirst: true,
-    isLast: false,
-    likeStatus: false,
-    favNums: 0
+    cid: null,
+    type: null
   },
-
-  /**
-   * Lifecycle function--Called when page load
-   */
 
   onLoad: function(options) {
-    classicService.getLatest().then(classic => {
+    if (options.cid) {
       this.setData({
-        currentClassic: classic,
-        firstClassic: classic
+        cid: options.cid,
+        type: options.type
       })
-
-      this.loadLikeInfo(classic.type, classic.id)
-      classicService.setStorageSync(classic.index, classic)
-    })
-  },
-
-  onLike: function(event) {
-    const artId = this.data.currentClassic.id
-    const type = this.data.currentClassic.type
-    const like = event.detail.like
-
-    likeService.like({ artId, type, like })
-  },
-
-  onPrevious: function(event) {
-    this.onPreviousOrNext('next')
-  },
-
-  onNext: function(event) {
-    this.onPreviousOrNext('previous')
-  },
-
-  onPreviousOrNext(previousOrNext: 'previous' | 'next') {
-    classicService
-      .getPreviousOrNext(this.data.currentClassic.index, previousOrNext)
-      .then(classic => {
-        this.loadLikeInfo(classic.type, classic.id)
-
-        this.setData({
-          currentClassic: classic,
-          isFirst: classicService.isFirst(classic, this.data.firstClassic),
-          isLast: classicService.isLast(classic)
-        })
-      })
-  },
-
-  loadLikeInfo(type: number, id: number) {
-    likeService.getLikeInfo(type, id).then(like => {
-      this.setData({
-        likeStatus: like.like_status,
-        favNums: like.fav_nums
-      })
-    })
+    }
   },
 
   /**

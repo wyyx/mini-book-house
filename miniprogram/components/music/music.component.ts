@@ -1,6 +1,5 @@
 import { episodeBehavior } from '../behaviors/episode.behavior'
-
-const audioContext = wx.createInnerAudioContext()
+import { audioContext } from '../../utils/audio.util'
 
 Component({
   /**

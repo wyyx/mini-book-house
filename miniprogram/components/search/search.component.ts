@@ -2,16 +2,24 @@ import { keywordService } from '../../services/keyword.service'
 import { bookService } from '../../services/book.service'
 
 Component({
-  properties: {},
+  properties: {
+    more: {
+      type: String,
+      value: '',
+      optionalTypes: [],
+      observer: 'loadMore' as any
+    }
+  },
   data: {
     historyWords: [],
     hotWords: [],
-    q: '',
+    query: '',
     searching: false,
     loadingCenter: false,
     loadingMore: false,
     books: [],
-    noResult: false
+    noResult: false,
+    totalLength: null
   },
   attached() {
     keywordService.getHotKeywords().then(res => {
@@ -33,32 +41,82 @@ Component({
       this.closeNoResult()
     },
     onConfirm(event) {
+      console.log('onConfirm')
       this.showResult()
       this.showLoadingCenter()
 
-      const q = event.detail.value || event.detail.text
+      // get search string from tag or search box
+      const query = event.detail.value || event.detail.text
+
       // return when white space
-      if (!q || !q.trim()) {
+      if (!query || !query.trim()) {
         return
       }
 
+      // set search string
       this.setData({
-        q
+        query
       })
 
-      bookService.search(0, q).then(books => {
-        console.log('TCL: onConfirm -> books', books)
+      // first loading
+      bookService.search(0, query).then(res => {
         this.setData({
-          books
+          books: res.books,
+          totalLength: res.total
         })
 
-        keywordService.addToHistory(q)
-
-        if (books.length < 1) {
+        // when no result
+        if (res.books.length < 1) {
           this.showNoResult()
         }
+
         this.hideLoadingCenter()
+
+        keywordService.addToHistory(query)
       })
+    },
+    loadMore() {
+      console.log('loadMore')
+
+      const query = this.data.query
+
+      // return when white space
+      if (!query || !query.trim()) {
+        return
+      }
+
+      // return when no more data
+      if (!this.hasMore()) {
+        return
+      }
+
+      // return when is loading more
+      if (this.data.loadingMore) {
+        return
+      }
+
+      // loading more when reaching page bottom
+      this.showLoadingMore()
+      const currentLength = this.data.books.length
+
+      bookService
+        .search(currentLength, query)
+        .then(res => {
+          const sumBooks = this.data.books.concat(res.books)
+
+          // update books
+          this.setData({
+            books: sumBooks
+          })
+
+          this.hideLoadingMore()
+        })
+        .catch(err => {
+          this.hideLoadingMore()
+        })
+    },
+    hasMore() {
+      return this.data.books.length < this.data.totalLength
     },
     showResult() {
       this.setData({
@@ -89,6 +147,16 @@ Component({
     hideLoadingCenter() {
       this.setData({
         loadingCenter: false
+      })
+    },
+    showLoadingMore() {
+      this.setData({
+        loadingMore: true
+      })
+    },
+    hideLoadingMore() {
+      this.setData({
+        loadingMore: false
       })
     }
   } as any

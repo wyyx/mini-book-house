@@ -79,7 +79,7 @@ export class BookService extends HttpService {
         start: start
       }
     }).then(res => {
-      return (res.data as SearchBookResponse).books
+      return res.data as SearchBookResponse
     })
   }
 }

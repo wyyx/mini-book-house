@@ -88,6 +88,7 @@
 .books-container {
   width: 570rpx;
   margin-top: 100rpx;
+  margin-bottom: 25rpx;
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
@@ -95,7 +96,7 @@
   justify-content: space-between;
 }
 
-.loading {
+.loading-more {
   margin: 50rpx 0 50rpx 0;
 }
 
@@ -103,6 +104,7 @@
   position: absolute;
   top: 50%;
   left: 50%;
+  transform: translateX(-50%);
 }
 
 .empty-tip {

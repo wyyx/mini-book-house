@@ -1,4 +1,5 @@
 import { bookService } from '../../services/book.service'
+import { randomString } from '../../utils/common.util'
 
 Page({
   /**
@@ -31,6 +32,12 @@ Page({
   onCancel(event) {
     this.setData({
       searching: false
+    })
+  },
+
+  onReachBottom() {
+    this.setData({
+      more: randomString(16)
     })
   }
 })

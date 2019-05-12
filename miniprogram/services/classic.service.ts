@@ -10,6 +10,12 @@ export class ClassicService extends HttpService {
     }).then(res => res.data as Classic)
   }
 
+  getMyFavorite() {
+    return this.request({
+      path: '/classic/favor'
+    }).then(res => res.data as Classic[])
+  }
+
   getPreviousOrNext(currentIndex: number, previousOrNext: 'previous' | 'next') {
     const targetIndex = previousOrNext === 'previous' ? currentIndex - 1 : currentIndex + 1
     const classicFromStorage = this.getStorageByIndex(targetIndex)

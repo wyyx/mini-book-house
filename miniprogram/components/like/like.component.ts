@@ -13,6 +13,11 @@ Component({
       type: Number,
       value: 0,
       optionalTypes: []
+    },
+    readOnly: {
+      type: Boolean,
+      value: false,
+      optionalTypes: []
     }
   },
 
@@ -30,6 +35,10 @@ Component({
 
   methods: {
     onTap(event) {
+      if (this.data.readOnly) {
+        return
+      }
+
       const like = this.properties.like ? false : true
       const count = this.properties.like ? this.properties.count - 1 : this.properties.count + 1
       this.setData({

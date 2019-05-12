@@ -71,6 +71,14 @@ export class BookService extends HttpService {
     })
   }
 
+  getFavoriteBooksCount(): Promise<number> {
+    return this.request({
+      path: `/book/favor/count`
+    }).then(res => {
+      return (res.data as any).count
+    })
+  }
+
   search(start: number, q: string) {
     return this.request({
       path: '/book/search?summary=1',

@@ -3,7 +3,8 @@
     "pages/classic/classic-page",
     "pages/book/book-page",
     "pages/favorite/favorite-page",
-    "pages/book-detail/book-detail-page"
+    "pages/book-detail/book-detail-page",
+    "pages/about/about-page"
   ],
   "window": {
     "backgroundTextStyle": "light",
